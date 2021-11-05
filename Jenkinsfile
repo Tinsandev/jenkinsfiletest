@@ -10,7 +10,7 @@ pipeline {
                     def getRC = get.getResponseCode();
                     println(getRC);
                     if(getRC.equals(500)) {
-                        println(get.getInputStream().getText());
+                        println(getRC);
                     }
                 }
             }
