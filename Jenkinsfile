@@ -20,15 +20,15 @@ pipeline {
         }
     }
 node {
-  def remote = [:]
+      stage('Remote SSH') {
+        def remote = [:]
   remote.name = 'test'
-  remote.host = '172.17.0.4'
+ remote.host = '172.17.0.4'
   remote.user = 'root'
   remote.password = 'root'
   remote.allowAnyHosts = true
-  stage('Remote SSH') {
-    sshCommand remote: remote, command: "ls -lrt"
-    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+    writeFile file: 'abc.sh', text: 'ls -lrt'
+    sshScript remote: remote, script: "abc.sh"
   }
 }
 }
